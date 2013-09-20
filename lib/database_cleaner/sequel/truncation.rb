@@ -16,7 +16,7 @@ module DatabaseCleaner
           # * Faster. Less roundtrips to the db.
           unless (tables= tables_to_truncate(db)).empty?
             all_tables= tables.map{|t| %["#{t}"]}.join ','
-            db.run "TRUNCATE TABLE #{all_tables};"
+            db.run "TRUNCATE TABLE #{all_tables} RESTART IDENTITY;"
           end
         else
           # Truncate each table normally
